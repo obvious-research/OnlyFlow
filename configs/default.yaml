@@ -1,0 +1,121 @@
+defaults:
+  - presets@_global_: local
+  - models: models
+  - training: training
+  - logging@logging_args: basic_logger
+  - _self_
+
+
+
+hydra:
+  output_subdir: .config
+  job:
+    env_set:
+      PYTORCH_CUDA_ALLOC_CONF: "expandable_segments:True"
+      TORCHINDUCTOR_FX_GRAPH_CACHE: 1
+      TORCHINDUCTOR_CACHE_DIR: ${oc.env:TMPDIR}/torchinductor_cache
+      TORCH_CUDNN_SDPA_ENABLED: 1
+      WANDB_MODE: offline
+
+misc:
+  detect_anomaly: false
+  gradient_accumulation_steps: 1
+  train_dataloader:
+    num_workers: 4
+    prefetch_factor: 2
+  checkpointing: false
+  vae_chunk_size: 24
+  flow_chunk_size: 24
+  force_cpu: False
+  enable_amp:
+    vae: True
+    unet: True
+  enable_compile: True
+  cudnn:
+    enabled: True
+    benchmark: True
+    deterministic: False
+    allow_tf32: True
+  global_seed: 312
+
+logging_args:
+  interval: 20
+  checkpointing_every:
+    epochs: !!null
+    steps: 500
+  wandb:
+    entity: mathis
+    project: flowctrl
+
+profiling:
+  enabled: False
+  memory: False
+  with_stack: False
+  record_shapes: False
+
+dataset:
+  video_size: [ 256, 384 ]
+
+resume: !!null
+
+models:
+  XDG_CACHE_HOME: ~/.cache
+  model_optical_flow:
+    path:
+  model_unet:
+    path: 'stable-diffusion-v1-5/stable-diffusion-v1-5'
+  adapter_lora:
+    name: v3_sd15_adapter.ckpt
+    url: https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_adapter.ckpt
+    scale: 1.0
+  model_motion_modules:
+    path: 'guoyww/animatediff-motion-adapter-v1-5-3'
+
+noise_scheduler_kwargs:
+  num_train_timesteps: 1000
+  beta_start: 0.00085
+  beta_end: 0.012
+  beta_schedule: "linear"
+  steps_offset: 1
+  clip_sample: false
+
+flow_encoder_param:
+  flow_encoder_kwargs:
+    downscale_factor: 8
+    channels: [ 320, 640, 1280, 1280 ]
+    nums_rb: 2
+    ksize: 1
+    sk: true
+    use_conv: false
+    compression_factor: 1
+    temporal_attention_nhead: 8
+    positional_embeddings: "sinusoidal"
+    num_positional_embeddings: 16
+  attention_processor_kwargs:
+    add_spatial: false
+    add_temporal: true
+    encoder_only: false
+    query_condition: true
+    key_value_condition: true
+    flow_scale: 1.0
+
+training:
+  num_epochs: 1
+  random_null_text: 0.1
+
+validation:
+  batch_size: 1
+
+optimization:
+  name: Adam
+  lr: 1.e-4
+  lr_warmup_steps: 0
+  lr_scheduler: "constant"
+  beta1: 0.9
+  beta2: 0.999
+  epsilon: 5e-8
+  max_grad_norm: 0.4
+  weight_decay: 1e-2
+
+loss:
+  name: MSELoss

@@ -1,0 +1,17 @@
+wandb/
+debugs/
+output/
+outputs/
+samples/
+__pycache__/
+ossutil_output/
+.ossutil_checkpoint/
+.idea/
+.DS_Store
+
+
+*.ipynb
+*.safetensors 
+*.ckpt
+.idea
+*.csv

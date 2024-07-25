@@ -1,0 +1,28 @@
+# @package _global_
+launcher: local
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d_%H-%M-%S}/${hydra.job.override_dirname}
+  job:
+    config:
+      override_dirname:
+        exclude_keys:
+          - misc.global_seed
+          - presets
+    env_set:
+      OMP_NUM_THREADS: 1
+
+dataset:
+  video_size: [ 128, 128 ]
+  shards: ${oc.env:PWD}/../webvid/webvid_desc.json
+
+misc:
+  enable_amp: false
+  train_dataloader:
+    num_workers: 2
+    prefetch_factor: 2
+
+
+training:
+  batch_size: 2

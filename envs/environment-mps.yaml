@@ -1,0 +1,36 @@
+name: onlyflow
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pip
+  - pip:
+      - pip
+      - setuptools
+      - wheel
+
+      - diffusers
+      - transformers
+      - einops
+      - safetensors
+      - webdataset
+      - peft
+
+      - hydra-core
+      - termcolor
+
+      - imageio[ffmpeg]
+      - av
+      - numpy>=2.0.0
+
+      - gradio
+      - wandb
+
+      - accelerate
+      - pytorch-ignite
+      - torchmetrics

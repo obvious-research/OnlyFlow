@@ -1,0 +1,38 @@
+# @package _global_
+launcher: slurm
+models:
+  XDG_CACHE_HOME: ${oc.env:HOME}/.cache
+
+
+hydra:
+  run:
+    dir: outputs/output_${oc.env:SLURM_JOB_ID}/artifacts
+  job:
+    config:
+      override_dirname:
+        exclude_keys:
+          - misc.global_seed
+          - presets
+    env_set:
+      OMP_NUM_THREADS: ${oc.env:SLURM_CPUS_PER_TASK}
+
+dataset:
+  shards: ${oc.env:SCRATCH}/webvid/webvid_desc.json
+
+training:
+  batch_size: 2
+
+misc:
+  checkpointing: True
+  gradient_accumulation_steps: 4
+  vae_chunk_size: 32
+  flow_chunk_size: 32
+
+logging_args:
+  wandb:
+    group: ${oc.env:SLURM_JOB_ID}
+
+validation:
+  first: true
+  every_steps: 500
+  batch_size: 1

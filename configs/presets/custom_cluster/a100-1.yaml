@@ -1,0 +1,40 @@
+# @package _global_
+launcher: torchrun
+models:
+  XDG_CACHE_HOME: ~/.cache
+
+
+hydra:
+  run:
+    dir: outputs/${now:%Y-%m-%d}/${hydra.job.override_dirname}
+  job:
+    config:
+      override_dirname:
+        exclude_keys:
+          - misc.global_seed
+          - presets
+    env_set:
+      OMP_NUM_THREADS: 32
+      TORCHINDUCTOR_CACHE_DIR: ~/.cache/torchinductor_cache
+
+dataset:
+  shards: ${oc.env:PWD}/../webvid/webvid_desc.json
+
+training:
+  batch_size: 4
+
+misc:
+  checkpointing: False
+  gradient_accumulation_steps: 8
+  vae_chunk_size: 64
+  flow_chunk_size: 64
+
+logging_args:
+  wandb:
+    group: "custom_cluster"
+  interval: 2
+
+validation:
+  first: false
+  every_steps: 50
+  batch_size: 4

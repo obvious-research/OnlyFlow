@@ -1,0 +1,38 @@
+name: onlyflow
+channels:
+  - pytorch
+  - nvidia
+  - defaults
+dependencies:
+  - python=3.12
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda
+  - pip
+  - pip:
+      - pip
+      - setuptools
+      - wheel
+
+      - git+https://github.com/obvious-research/diffusers.git
+      - transformers
+      - einops
+      - safetensors
+      - webdataset
+      - peft
+
+      - hydra-core
+      - termcolor
+
+      - imageio[ffmpeg]
+      - av
+      - numpy>=2.0.0
+
+      - gradio
+      - wandb
+
+      - accelerate
+      - pytorch-ignite
+      - torchmetrics
+      - git+https://github.com/idriscnrs/idr_torch.git
