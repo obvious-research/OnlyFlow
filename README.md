@@ -1,13 +1,15 @@
 # OnlyFlow
 
-This repository is the official implementation of [OnlyFlow](http://arxiv.org/abs/2411.10501).
+This repository is the official implementation of
+[OnlyFlow](https://openaccess.thecvf.com/content/CVPR2025W/CVEU/html/Koroglu_OnlyFlow_Optical_Flow_based_Motion_Conditioning_for_Video_Diffusion_Models_CVPRW_2025_paper.html),
+published at the **CVPR 2025 Workshops**.
 
 This `main` branch contains the codes and model for OnlyFlow implemented on AnimateDiff v3.
 
 > **OnlyFlow: Optical Flow based Motion Conditioning for Video Diffusion Models** <br>
 > [Mathis Koroglu](https://github.com/Arlaz), [Hugo Caselles-Dupré](https://sites.google.com/view/hugo-caselles-dupre), [Guillaume Jeanneret Sanmiguel](https://guillaumejs2403.github.io/), [Matthieu Cord](https://cord.isir.upmc.fr/)<br>
 
-## [[Paper](http://arxiv.org/abs/2411.10501)] [[Project Page](https://obvious-research.github.io/onlyflow/)] [[Weights](https://huggingface.co/obvious-research/OnlyFlow/tree/main)] [[HF Demo](https://huggingface.co/spaces/obvious-research/OnlyFlow)]
+## [[Paper](https://openaccess.thecvf.com/content/CVPR2025W/CVEU/html/Koroglu_OnlyFlow_Optical_Flow_based_Motion_Conditioning_for_Video_Diffusion_Models_CVPRW_2025_paper.html)] [[arXiv](https://arxiv.org/abs/2411.10501)] [[Project Page](https://obvious-research.github.io/onlyflow/)] [[Weights](https://huggingface.co/obvious-research/onlyflow)] [[HF Demo](https://huggingface.co/spaces/obvious-research/OnlyFlow)]
 
 ![](assets/onlyflow.png)
 
@@ -125,13 +127,12 @@ This project was provided with computing HPC & AI and storage resources by GENCI
 ## BibTeX
 
 ```bibtex
-@preprint{koroglu2024onlyflow,
-      title={OnlyFlow: Optical Flow based Motion Conditioning for Video Diffusion Models},
-      author={Mathis Koroglu and Hugo Caselles-Dupré and Guillaume Jeanneret Sanmiguel and Matthieu Cord},
-      year={2024},
-      eprint={2411.10501},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2411.10501},
+@InProceedings{Koroglu_2025_CVPR,
+    author    = {Koroglu, Mathis and Caselles-Dupr\'e, Hugo and Jeanneret, Guillaume and Cord, Matthieu},
+    title     = {OnlyFlow: Optical Flow based Motion Conditioning for Video Diffusion Models},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+    month     = {June},
+    year      = {2025},
+    pages     = {6280-6290}
 }
 ```
